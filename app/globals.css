@@ -576,16 +576,7 @@ p {
     gap 200ms ease;
 }
 
-.button:hover {
-  /* background: var(--foreground);
-  
-
-  color: var(--background); */
-  gap:7px
-  
-
-}
-
+/* 
 .button-secondary {
   border-color: var(--border);
 
