@@ -7,8 +7,8 @@ type ButtonProps = {
 
 export default function Button({ children, className = "" }: ButtonProps) {
   return (
-    <button className={`flex items-center gap-1 ${className}`}>
-      <span>{children}</span>
+    <button className={`flex items-center  uppercase s  gap-1 ${className}`}>
+      <span className="text-sm">{children}</span>
       <MoveRight size={15} />
     </button>
   );
