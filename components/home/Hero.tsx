@@ -3,14 +3,14 @@ import { MoveDown } from "lucide-react"
 export default function Hero(){
     return (
         <>
-      <div className="container gap-y-10">
-        <div className="flex gap-3.5">
-                <div className="flex flex-col text-body-large w-1/2 h-full ">
+      <div className="container gap-y-10 flex-col ">
+        <div className="flex flex-col sm:flex-row gap-3.5">
+                <div className="flex flex-col text-body-large  h-full ">
               <h5 className="text-sm text-muted-foreground">FULL - STACK WEB DEVELOPER</h5>
             <h1 className="text-hero">I build modern websites and web apps. </h1>
-            <h3 className="text-muted text-base leading-12">From UI to API, I create complete digital products using modern web technologies.</h3>
+            <h3 className="text-muted text-base ">From UI to API, I create complete digital products using modern web technologies.</h3>
         </div>
-        <div className="flex  bg-foreground  w-2/4 h-100">
+        <div className="flex  bg-foreground w-3/4  h-100">
          </div>
         </div>
      

@@ -2,9 +2,9 @@ import Button from "./Button";
 
 export default function CardProject({id,title,description,projecttype,techStack,link}:{id:number,title:string,description:string,projecttype :string,techStack:string[],link:string}){
     return(
-        <div className={`flex ${id % 2==0 ? 'flex-row-reverse':'' }    gap-50 border-b border-muted-foreground  px-5 py-10 `}>
+        <div className={`flex flex-col sm:flex-row ${id % 2==0 ? 'sm:flex-row-reverse':'' }  gap-10  sm:gap-50 border-b border-muted-foreground  px-5 py-10 `}>
 
-            <div className="flex w-3/4 ">
+            <div className="flex sm:w-3/4 ">
                 <div className="flex w-full h-100 bg-foreground"></div>
             </div>
             <div className="flex flex-col w-1/2 justify-center gap-2">

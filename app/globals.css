@@ -493,7 +493,8 @@ p {
   margin-top: 40px;
 }
 
-
+.intro-title{font-size:clamp(34px,4.5vw,64px);line-height:1.05;letter-spacing:-.05em;max-width:900px;margin:0}
+.copy{color:var(--muted);max-width:560px}
 /* =========================================================
    3D HERO
    ========================================================= */
