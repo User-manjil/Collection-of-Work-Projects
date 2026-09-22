@@ -1,7 +1,11 @@
 export default function About(){
     return(
         <>
-        this is about page
+       <section className="section">
+        <div className="container">
+            
+        </div>
+       </section>
         
         </>
     )
