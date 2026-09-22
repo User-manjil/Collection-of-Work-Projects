@@ -8,7 +8,10 @@ export default function Hero(){
                 <div className="flex flex-col text-body-large  h-full ">
               <h5 className="text-sm text-muted-foreground">FULL - STACK WEB DEVELOPER</h5>
             <h1 className="text-hero">I build modern websites and web apps. </h1>
-            <h3 className="text-muted text-base ">From UI to API, I create complete digital products using modern web technologies.</h3>
+            <div className="flex mt-3">
+               <p className="text-muted  text-base ">From UI to API, I create complete digital products using modern web technologies.</p>
+            </div>
+           
         </div>
         <div className="flex  bg-foreground w-3/4  h-100">
          </div>

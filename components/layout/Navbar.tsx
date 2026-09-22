@@ -1,21 +1,22 @@
 "use client"
+import Link from "next/link"
 import { useState } from "react"
 
 export default function Navbar(){
-    const [theme,setTheme]= useState('Dark')
+    const [theme,setTheme]= useState('Light')
 
 
     return(
       
-        <div className="flex container px-20">
+        <div className={`flex ${theme=='Dark' ? 'dark':''}  container px-20`}>
         <div className=" site-header px-10 ">
             <div className="nav  flex justify-between items-center">
-                <div className="nav-logo">MANJIL</div>
+                <div className="nav-logo "><Link href='/'>MANJIL</Link></div>
                 <div className="nav-links">
-                    <div className="nav-link">Work</div>
-                    <div className="nav-link">About</div>
-                    <div className="nav-link">Blog</div>
-                    <div className="nav-link">Contact</div>
+                    <div className="nav-link"> <Link href={'/work'}>Work</Link> </div>
+                    <div className="nav-link"> <Link href={'/about'}>About</Link> </div>
+                    <div className="nav-link"> <Link href={'/blog'}>Blog</Link> </div>
+                    <div className="nav-link"> <Link href={'/contact'}>Contact</Link> </div>
                     <div className="flex">
                         <button 
                 onClick={()=>{

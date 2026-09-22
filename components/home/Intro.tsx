@@ -12,7 +12,10 @@ export default function Introduction(){
             
             <div className="flex  flex-col">
                 <h3 className="intro-title">I build digital experiences that sit between design and engineering.</h3>
-                <p className="text-sm text-muted-foreground copy ">I work across frontend, backend and product development — turning ideas into polished, scalable web applications.</p>
+                <div className="flex mt-2 ">
+                <p className="text-base text-muted-foreground copy ">I work across frontend, backend and product development — turning ideas into polished, scalable web applications.</p>
+                </div>
+                
             </div>
         </div>
         <TechStack/>
