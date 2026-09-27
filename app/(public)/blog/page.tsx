@@ -27,19 +27,22 @@ export default function Blog(){
                 Things I've learned while buidling for web.
             </div>
         </div>
-        <div className="container">
+        <section className="section">
+         <div className="container">
             <div className="flex flex-col">
             {blogData.map((item) => (
                 <BlogItem
                     key={item.id}
                     title={item.title}
-                    
                     date={item.date}
                     link={item.link}
                 />
             ))}
         </div>
         </div>
+
+        </section>
+       
         
 
         </section>
