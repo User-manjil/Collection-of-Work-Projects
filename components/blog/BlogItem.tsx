@@ -1,6 +1,6 @@
 export default function BlogItem({title,date,link}:{title:string,date:string,link:string}){
     return(
-        <div className="flex flex-col gap-2 p-5 border-b border-muted">
+        <div className="flex flex-col gap-2 py-5 border-b border-muted">
             <h2 className="text-xl font-bold">{title}</h2>
             {/* <p className="text-muted">{description}</p> */}
             <div className="flex justify-between items-center">

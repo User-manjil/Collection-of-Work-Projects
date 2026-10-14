@@ -10,8 +10,8 @@ export default function Navbar(){
       
         <div className={`flex ${theme=='Dark' ? 'dark':''} max-w-[1920px]  container px-20`}>
         <div className=" site-header px-10 ">
-            <div className="nav  flex justify-between items-center">
-                <div className="nav-logo "><Link href='/'>MANJIL</Link></div>
+            <div className="nav   flex justify-between items-center">
+                <div className="nav-logo  "><Link href='/'>MANJIL</Link></div>
                 <div className="nav-links">
                     <div className="nav-link"> <Link href={'/work'}>Work</Link> </div>
                     <div className="nav-link"> <Link href={'/about'}>About</Link> </div>

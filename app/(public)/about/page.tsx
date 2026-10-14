@@ -12,11 +12,10 @@ export default function About(){
                 FULL-stack web developer with an eye for design
             </h1>
         </div>
-       </section>
-       <section className="section">
-        <div className="container">
-            <div className="flex justify-between">
-                <div className="flex w-1/2 flex-col gap-2">
+      
+        <div className="container m-10">
+            <div className="flex sm:flex-row  flex-col justify-between">
+                <div className="flex w-full text-justify md:text-left md:w-1/2 flex-col gap-2">
                     <div className="label">
                         <p className="text-muted text-sm uppercase">Introduction</p>
                     </div>
@@ -24,7 +23,7 @@ export default function About(){
                         I combine product thinking, interface design and software engineering to build useful digital products.
                     </p>
                 </div>
-                <div className="flex p-2 w-2/4 text-sm  text-muted">
+                <div className="flex p-2 w-full md:w-1/4 text-justify md:text-left align-baseline text-base  text-muted">
                     I work across frontend, backend and product development, with a focus on thoughtful interfaces, scalable systems and practical solutions.
                 </div>
             </div>
