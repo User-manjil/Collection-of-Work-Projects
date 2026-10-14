@@ -1,4 +1,6 @@
 "use client"
+
+import Image from "next/image";
 import {usePathname} from "next/navigation";
 export default function Blog(){
     
@@ -9,11 +11,16 @@ export default function Blog(){
         <section className="section">
             <div className="container">
                <h1 className="blog-title uppercase">{slug?.split('-').join(' ')}</h1>
-                <p className="article-header">
-                    Lorem ipsum dolor sit amet, consectetur
-                     adipisicing elit. Enim, error itaque cupiditate, doloribus iusto sunt nam veritatis aliquam rerum esse sed dolor eligendi.
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, laudantium repellendus. Doloremque modi exercitationem, nemo atque minima assumenda quam reiciendis pariatur quod eos numquam nulla. Perferendis, quidem assumenda maiores fuga architecto perspiciatis explicabo cumque sapiente quos est exercitationem placeat corporis saepe illum facere atque sit voluptate ad nesciunt soluta natus?
-                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci libero ex dicta, porro, accusamus accusantium iure nesciunt pariatur, natus officiis eveniet ea id non voluptatem vitae similique aut eligendi? Eum cum id, ut molestiae fuga ullam vel! Repellat expedita quisquam fugiat quas delectus odit provident maiores dignissimos explicabo alias!
+               <div className="flex w-300 h-100 bg-black my-4">
+               </div>
+               {/* <Image  width={1170} height={780} alt="blog"
+               src='https://picsum.photos/200/300'
+               /> */}
+                <p className="article-header text-foreground text-justify">
+                    <span className="text-2xl">L</span>orem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Enim, error itaque cupiditate, doloribus iusto sunt nam veritatis aliquam rerum esse sed dolor eligendi.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, laudantium repellendus. Doloremque modi exercitationem, nemo atque minima assumenda quam reiciendis pariatur quod eos numquam nulla. Perferendis, quidem assumenda maiores fuga architecto perspiciatis explicabo cumque sapiente quos est exercitationem placeat corporis saepe illum facere atque sit voluptate ad nesciunt soluta natus?
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci libero ex dicta, porro, accusamus accusantium iure nesciunt pariatur, natus officiis eveniet ea id non voluptatem vitae similique aut eligendi? Eum cum id, ut molestiae fuga ullam vel! Repellat expedita quisquam fugiat quas delectus odit provident maiores dignissimos explicabo alias!
                      
                      </p>
             </div>
