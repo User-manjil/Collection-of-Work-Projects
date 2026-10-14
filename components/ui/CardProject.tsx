@@ -1,33 +1,69 @@
-import Button from "./Button";
+import Link from "next/link"
+import Button from "./Button"
+import { Code2 } from "lucide-react"
 
-export default function CardProject({id,title,description,projecttype,techStack,link}:{id:number,title:string,description:string,projecttype :string,techStack:string[],link:string}){
-    return(
-        <div className={`flex flex-col sm:flex-row ${id % 2==0 ? 'sm:flex-row-reverse':'' }  gap-10  sm:gap-50 border-b border-muted-foreground  px-5 py-10 `}>
+type CardProjectProps = {
+  id: number
+  title: string
+  subtitle?: string
+  description: string
+  projecttype: string
+  techStack: string[]
+  link: string
+}
 
-            <div className="flex sm:w-3/4 ">
-                <div className="flex w-full h-100 bg-foreground"></div>
-            </div>
-            <div className="flex flex-col w-1/2 justify-center gap-2">
-                <h2 className="text-xs text-muted-foreground uppercase">Project {id}  • {projecttype}</h2>
-                 <h3 className="text-2xl font-bold">{title}</h3>
-                <p className="text-sm text-muted-foreground">{description}</p>
-                <p className="text-sm underline text-accent">Link: <a href={link} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
-                    {link}
-                </a></p>
-                
-                <div className="flex flex-wrap gap-1">
-                {techStack.map((tech, index) => (
-                    <span key={index} className="text-xs text-muted uppercase  px-2 py-1 rounded-md">
-                        {tech}
-                    </span>
-                ))}
-            </div>
-            <Button className="button w-fit"  >CASE STUDY</Button>
+export default function CardProject({
+  id,
+  title,
+  subtitle,
+  description,
+  projecttype,
+  techStack,
+  link,
+}: CardProjectProps) {
+  const number = String(id).padStart(2, "0")
+  const isReversed = id % 2 === 0
 
+  return (
+    <article className="project-editorial">
+      <div
+        className="project-grid"
+        style={isReversed ? { direction: "rtl" } : undefined}
+      >
+        {/* Visual Box */}
+        <div className="project-media-container" style={{ direction: "ltr" }}>
+          <div className="project-preview-card">
+            <div className="preview-card-inner">
+              <Code2 size={36} className="text-muted" />
+              <span className="preview-card-title">{title}</span>
             </div>
-            
-           
-            
+          </div>
         </div>
-    )
+
+        {/* Content */}
+        <div className="project-content-editorial" style={{ direction: "ltr" }}>
+          <p className="project-number text-small text-muted">
+            {number} · {projecttype}
+          </p>
+
+          <h3 className="project-title">{title}</h3>
+          {subtitle && <p className="project-subtitle text-muted">{subtitle}</p>}
+
+          <p className="project-description text-small">{description}</p>
+
+          <div className="project-tags">
+            {techStack.map((tech) => (
+              <span key={tech} className="project-tag">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div style={{ marginTop: "24px" }}>
+            <Button href={link}>Case Study</Button>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
 }

@@ -1,55 +1,64 @@
-import BlogItem from "@/components/blog/BlogItem";
+import Link from "next/link"
+import { getBlogs } from "@/lib/store"
+import { ArrowUpRight } from "lucide-react"
 
-export default function Blog(){
-    const blogData=[
-        {id:1,
-        title:"My Journey as a Full Stack Developer",
-        description:"In this blog post, I will share my experiences and insights gained while working as a full stack developer. From the challenges I faced to the lessons I learned, join me on this journey of growth and discovery in the world of web development.",
-        date:"June 15, 2023",
-        link:"/blog/my-journey-as-a-full-stack-developer"},
-        {id:2,
-        title:"Building Scalable Web Applications",
-        description:"In this article, I will discuss the key principles and best practices for building scalable web applications. From architecture design to performance optimization, learn how to create applications that can handle increasing user demands and traffic.",
-        date:"July 10, 2023",
-        link:"/blog/building-scalable-web-applications"}
-    ];
-    return(
-        <>
-        <section className="section">
-        <div className="container ">
-            <div className="label text-sm uppercase text-muted">
-                Blog
+export const revalidate = 0
+
+export default async function BlogPage() {
+  const blogs = await getBlogs(true)
+
+  return (
+    <div className="section-spacious">
+      <div className="container-reading">
+        {/* Minimal Hero Header with generous negative space */}
+        <header className="page-header-spacious">
+          <p className="text-label">Blog</p>
+          <h1 className="text-display page-headline">
+            Articles &amp; Notes
+          </h1>
+          <p className="page-lead text-muted">
+            Thoughts on building software, web performance, and modern web technologies.
+          </p>
+        </header>
+
+        {/* Minimal Blog Directory List */}
+        <div className="blog-directory-spacious">
+          {blogs.length === 0 ? (
+            <div className="empty-state">
+              <p className="text-muted text-small">No articles published yet.</p>
             </div>
-            <h1 className="text-hero text-body-larg flex-wrap p">
-                   Notes / Articles 
-            </h1>
-             <div className="label text-sm  text-muted">
-                Things I've learned while buidling for web.
-            </div>
-        </div>
-        <section className="section">
-         <div className="container">
-            <div className="flex flex-col">
-            {blogData.map((item) => (
-                <BlogItem
-                    key={item.id}
-                    title={item.title}
-                    date={item.date}
-                    link={item.link}
-                />
-            ))}
-        </div>
-        </div>
+          ) : (
+            blogs.map((post) => (
+              <article key={post.id || post.slug} className="blog-row-minimal">
+                <Link href={`/blog/${post.slug}`} className="blog-link-wrapper">
+                  <div className="blog-meta-minimal">
+                    <span className="text-small text-muted">
+                      {new Date(post.createdAt || Date.now()).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <span className="meta-dot">·</span>
+                    <span className="text-small text-muted">{post.category}</span>
+                    <span className="meta-dot">·</span>
+                    <span className="text-small text-muted">{post.readTime}</span>
+                  </div>
 
-        </section>
-       
-        
+                  <div className="blog-title-row">
+                    <h2 className="blog-title-minimal">{post.title}</h2>
+                    <div className="blog-arrow-cue">
+                      <ArrowUpRight size={18} />
+                    </div>
+                  </div>
 
-        </section>
-        
-        
-        
-        
-        </>
-    )
+                  <p className="blog-excerpt-minimal text-muted">{post.excerpt}</p>
+                </Link>
+              </article>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }

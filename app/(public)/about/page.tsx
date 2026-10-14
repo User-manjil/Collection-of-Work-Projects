@@ -1,44 +1,84 @@
-import TechStack from "@/components/home/TechStack";
+import TechStack from "@/components/home/TechStack"
 
-export default function About(){
-    return(
-        <>
-       <section className="section">
-        <div className="container ">
-            <div className="label text-sm uppercase text-muted">
-                About
-            </div>
-            <h1 className="text-hero text-body-larg flex-wrap p">
-                FULL-stack web developer with an eye for design
-            </h1>
-        </div>
-      
-        <div className="container m-10">
-            <div className="flex sm:flex-row  flex-col justify-between">
-                <div className="flex w-full text-justify md:text-left md:w-1/2 flex-col gap-2">
-                    <div className="label">
-                        <p className="text-muted text-sm uppercase">Introduction</p>
-                    </div>
-                    <p className="text-2xl font-medium">
-                        I combine product thinking, interface design and software engineering to build useful digital products.
-                    </p>
-                </div>
-                <div className="flex p-2 w-full md:w-1/4 text-justify md:text-left align-baseline text-base  text-muted">
-                    I work across frontend, backend and product development, with a focus on thoughtful interfaces, scalable systems and practical solutions.
-                </div>
-            </div>
-        </div>
-       </section>
-       <section className="section">
+export default function About() {
+  const skills = [
+    {
+      title: "Frontend",
+      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML / CSS"],
+    },
+    {
+      title: "Backend",
+      items: ["Node.js", "Express.js", "Python", "REST APIs", "GraphQL"],
+    },
+    {
+      title: "Database",
+      items: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Redis"],
+    },
+    {
+      title: "Tools & Ops",
+      items: ["Git", "Docker", "AWS", "Vercel", "Figma"],
+    },
+  ]
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="case-study-hero">
         <div className="container">
-        <div className="label">
-                <p className="text-muted text-sm uppercase">Skills</p>
-                </div>   
-         <TechStack/>
+          <p className="text-label">About</p>
+          <h1 className="about-intro" style={{ marginTop: "16px" }}>
+            Full-stack web developer with an eye for design
+          </h1>
         </div>
-       
-       </section>
-        
-        </>
-    )
+      </section>
+
+      {/* Introduction */}
+      <section className="section section-border">
+        <div className="container">
+          <div className="intro-grid">
+            <p className="text-label">Introduction</p>
+            <div className="intro-body">
+              <h2 className="intro-title">
+                I combine product thinking, interface design and software
+                engineering to build useful digital products.
+              </h2>
+              <p className="text-body-large copy">
+                I work across frontend, backend and product development, with a
+                focus on thoughtful interfaces, scalable systems and practical
+                solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="section section-border">
+        <div className="container">
+          <p className="text-label" style={{ marginBottom: "48px" }}>
+            Skills &amp; Technologies
+          </p>
+          <div className="skills-grid">
+            {skills.map((group) => (
+              <div key={group.title} className="skill-group">
+                <p className="skill-group-title">{group.title}</p>
+                <ul className="skill-list">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Marquee */}
+      <section className="section section-border">
+        <div className="container">
+          <TechStack />
+        </div>
+      </section>
+    </>
+  )
 }

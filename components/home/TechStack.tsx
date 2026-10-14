@@ -1,18 +1,35 @@
+export default function TechStack() {
+  const stackCategories = [
+    {
+      group: "Frontend & 3D",
+      skills: ["React", "Next.js", "TypeScript", "Three.js", "WebGL", "Tailwind CSS"],
+    },
+    {
+      group: "Backend & Databases",
+      skills: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Redis", "REST / GraphQL"],
+    },
+    {
+      group: "Tools & Cloud",
+      skills: ["Docker", "AWS", "Git", "Linux", "Vercel", "CI/CD"],
+    },
+  ]
 
-export default function TechStack(){
-    const dataStack=['React','Next.js','Tailwind CSS','Node.js','Express.js','MongoDB','PostgreSQL','MySQL','Firebase','AWS']
-    return (
-        <div className="flex gap-10  py-5 border-y border-muted mt-10 flex-wrap">
-
-            {dataStack.map((item,index)=>{
-                return(
-                    <div key={index} className="flex   text-sm text-muted-foreground">
-                       
-                        <div>{item}</div>
-                    </div>
-                )
-            })}
-
-        </div>
-    )
+  return (
+    <div className="tech-matrix">
+      <div className="tech-matrix-grid">
+        {stackCategories.map((cat) => (
+          <div key={cat.group} className="tech-group">
+            <h4 className="tech-group-title text-small text-muted">{cat.group}</h4>
+            <div className="tech-pill-list">
+              {cat.skills.map((skill) => (
+                <span key={skill} className="tech-pill">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }

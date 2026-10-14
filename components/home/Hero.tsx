@@ -1,37 +1,57 @@
+import HeroScene from "../3d/HeroScene"
 import Button from "../ui/Button"
-import { MoveDown } from "lucide-react"
-export default function Hero(){
-    return (
-        <>
-      <div className="container gap-y-10 flex-col ">
-        <div className="flex flex-col sm:flex-row gap-3.5">
-                <div className="flex flex-col text-body-large  h-full ">
-              <h5 className="text-sm text-muted-foreground">FULL - STACK WEB DEVELOPER</h5>
-            <h1 className="text-hero">I build modern websites and web apps. </h1>
-            <div className="flex mt-3">
-               <p className="text-muted  text-base ">From UI to API, I create complete digital products using modern web technologies.</p>
+import { ArrowDown } from "lucide-react"
+
+export default function Hero() {
+  return (
+    <section className="hero" id="hero">
+      <div className="container">
+        {/* Simple minimal availability badge */}
+        <div className="hero-top-strip">
+          <div className="hero-status-pill">
+            <span className="hero-live-dot" />
+            <span className="status-pill-text">Available for projects</span>
+          </div>
+        </div>
+
+        <div className="hero-grid">
+          {/* Left: Content */}
+          <div className="hero-content">
+            <h1 className="hero-title text-hero">
+              Full-stack developer building clean web experiences.
+            </h1>
+
+            <p className="hero-description">
+              I design and build high-performance web applications, scalable backends,
+              and interactive 3D digital products.
+            </p>
+
+            <div className="hero-actions">
+              <Button href="/work">View My Work</Button>
+              <Button href="/contact">Get in Touch</Button>
             </div>
-           
-        </div>
-        <div className="flex  bg-foreground w-3/4  h-100">
-         </div>
-        </div>
-     
-    <div className="flex gap-10">
-    <Button className="button">Get in Touch</Button>
-    <Button className="button">View my Work</Button>
-    </div>
-      </div>
-      {/* <section className="section"> */}
-      <div className="container my-20 border-muted-foreground border-t py-5">
-        <div className="flex justify-between">
-          <p className="text-sm">AVAILABLE FOR SELECTED PROJECTS</p>
-          <p className="text-sm" >Based in Nepal • Working Worldwide</p>
-          <p className="items-center justify-center flex flex-col text-xs"> SCROLL <MoveDown size={15}/></p>
-        </div>
-      </div>
+          </div>
 
-    </>
+          {/* Right: Clean 3D Canvas Visual */}
+          <div className="hero-visual-wrapper">
+            <div className="hero-visual-frame">
+              <HeroScene />
+            </div>
+          </div>
+        </div>
 
-    )
+        {/* Minimal Hero Bottom Bar */}
+        <div className="hero-status">
+          <span className="text-small text-muted">
+            Based in Nepal · Available Worldwide
+          </span>
+
+          <a href="#introduction" className="hero-scroll-cue" aria-label="Scroll to introduction">
+            <span className="text-small text-muted">Scroll</span>
+            <ArrowDown size={14} className="scroll-arrow" />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
 }
