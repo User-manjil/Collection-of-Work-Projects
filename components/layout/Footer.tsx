@@ -40,7 +40,7 @@ export default function Footer() {
             <p className="footer-col-title" style={{ marginBottom: "16px" }}>
               Navigation
             </p>
-            <div className="footer-links">
+            <div className="footer-links w-fit flex">
               <Link href="/work" className="hover-link">Work</Link>
               <Link href="/about" className="hover-link">About</Link>
               <Link href="/blog" className="hover-link">Blog</Link>
@@ -48,7 +48,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="w-fit">
             <p className="footer-col-title" style={{ marginBottom: "16px" }}>
               Connect
             </p>
@@ -63,7 +63,7 @@ export default function Footer() {
                 <ArrowUpRight size={12} />
               </a>
               <a
-                href="https://linkedin.com/in/manjilaryal"
+                href="https://www.linkedin.com/in/manjil-aryal/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover-link footer-ext-link"
@@ -72,7 +72,7 @@ export default function Footer() {
                 <ArrowUpRight size={12} />
               </a>
               <a
-                href="https://twitter.com/manjilaryal"
+                href="https://x.com/AryalManjil_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover-link footer-ext-link"
