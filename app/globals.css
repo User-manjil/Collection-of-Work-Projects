@@ -525,8 +525,8 @@ p {
   align-items: center;
   justify-content: space-between;
   margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  /* border-top: 1px solid var(--border); */
 }
 
 .hero-scroll-indicator {
@@ -1637,8 +1637,8 @@ p {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--border-subtle);
+  margin-top: 40px ;
+  /* border-bottom: 1px solid var(--border-subtle); */
 }
 
 .hero-status-pill {
