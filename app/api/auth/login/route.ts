@@ -1,36 +1,42 @@
 import { NextResponse } from "next/server"
-import { getAdminCredentials } from "@/lib/auth"
+import { createAdminSessionToken } from "@/lib/admin-session"
+import { verifyAdminLogin } from "@/lib/auth"
 
 export async function POST(req: Request) {
   try {
     const { email, password } = await req.json()
-    const creds = await getAdminCredentials()
 
-    if (email === creds.email && password === creds.password) {
-      const token = "admin_auth_token_" + Buffer.from(`${email}:${Date.now()}`).toString("base64")
-      
-      const response = NextResponse.json({
-        success: true,
-        user: { email, role: "admin" },
-        token,
-      })
-
-      // Set cookie for server route verification
-      response.cookies.set("admin_token", token, {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      })
-
-      return response
+    if (!email || !password) {
+      return NextResponse.json(
+        { success: false, error: "Email and password are required" },
+        { status: 400 }
+      )
     }
 
-    return NextResponse.json(
-      { success: false, error: "Invalid credentials" },
-      { status: 401 }
-    )
+    const valid = await verifyAdminLogin(email, password)
+    if (!valid) {
+      return NextResponse.json(
+        { success: false, error: "Invalid credentials" },
+        { status: 401 }
+      )
+    }
+
+    const token = createAdminSessionToken()
+
+    const response = NextResponse.json({
+      success: true,
+      user: { email, role: "admin" },
+    })
+
+    response.cookies.set("admin_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    })
+
+    return response
   } catch {
     return NextResponse.json(
       { success: false, error: "Authentication failed" },

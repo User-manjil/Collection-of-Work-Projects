@@ -1,11 +1,12 @@
 import Link from "next/link"
-import { getProjects } from "@/lib/store"
-import { ArrowUpRight, Code2 } from "lucide-react"
+import { getPublicProjects } from "@/lib/public-cache"
+import { ArrowUpRight } from "lucide-react"
+import ProjectCoverImage from "@/components/ui/ProjectCoverImage"
 
-export const revalidate = 0
+export const revalidate = 120
 
 export default async function WorkPage() {
-  const projects = await getProjects()
+  const projects = await getPublicProjects()
 
   return (
     <div className="section-spacious">
@@ -30,12 +31,12 @@ export default async function WorkPage() {
                 <div className="work-grid-spacious">
                   {/* Left Media Box */}
                   <div className="work-media-box">
-                    <div className="project-preview-card">
-                      <div className="preview-card-inner">
-                        <Code2 size={36} className="text-muted" />
-                        <span className="preview-card-title">{project.title}</span>
-                      </div>
-                    </div>
+                    <ProjectCoverImage
+                      src={project.thumbnail}
+                      alt={`${project.title} preview`}
+                      title={project.title}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
 
                   {/* Right Content Column */}

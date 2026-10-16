@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Save, AlertCircle } from "lucide-react"
+import ProjectImageUpload from "@/components/admin/ProjectImageUpload"
 
 export default function NewProjectPage() {
   const router = useRouter()
@@ -19,6 +20,8 @@ export default function NewProjectPage() {
   const [metrics, setMetrics] = useState("")
   const [liveUrl, setLiveUrl] = useState("")
   const [githubUrl, setGithubUrl] = useState("")
+  const [thumbnail, setThumbnail] = useState("")
+  const [banner, setBanner] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -58,6 +61,8 @@ export default function NewProjectPage() {
           metrics,
           liveUrl,
           githubUrl,
+          thumbnail,
+          banner,
           featured: true,
         }),
       })
@@ -189,6 +194,23 @@ export default function NewProjectPage() {
               className="minimal-input"
             />
           </div>
+        </div>
+
+        <div className="form-grid-two">
+          <ProjectImageUpload
+            label="LISTING THUMBNAIL"
+            hint="Shown on the work index. Converted to WebP (~960×600) for fast loading."
+            variant="thumbnail"
+            value={thumbnail}
+            onChange={setThumbnail}
+          />
+          <ProjectImageUpload
+            label="CASE STUDY BANNER"
+            hint="Hero image on the case study page. Optimized to ~1920×900 WebP."
+            variant="banner"
+            value={banner}
+            onChange={setBanner}
+          />
         </div>
 
         <div className="form-field-group">

@@ -1,6 +1,5 @@
-import Link from "next/link"
 import Button from "./Button"
-import { Code2 } from "lucide-react"
+import ProjectCoverImage from "./ProjectCoverImage"
 
 type CardProjectProps = {
   id: number
@@ -10,6 +9,7 @@ type CardProjectProps = {
   projecttype: string
   techStack: string[]
   link: string
+  thumbnail?: string
 }
 
 export default function CardProject({
@@ -20,6 +20,7 @@ export default function CardProject({
   projecttype,
   techStack,
   link,
+  thumbnail,
 }: CardProjectProps) {
   const number = String(id).padStart(2, "0")
   const isReversed = id % 2 === 0
@@ -32,12 +33,12 @@ export default function CardProject({
       >
         {/* Visual Box */}
         <div className="project-media-container" style={{ direction: "ltr" }}>
-          <div className="project-preview-card">
-            <div className="preview-card-inner">
-              <Code2 size={36} className="text-muted" />
-              <span className="preview-card-title">{title}</span>
-            </div>
-          </div>
+          <ProjectCoverImage
+            src={thumbnail}
+            alt={`${title} preview`}
+            title={title}
+            sizes="(max-width: 768px) 100vw, 540px"
+          />
         </div>
 
         {/* Content */}

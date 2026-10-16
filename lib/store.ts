@@ -31,6 +31,8 @@ export interface ProjectItemData {
   metrics?: string
   liveUrl?: string
   githubUrl?: string
+  thumbnail?: string
+  banner?: string
   featured: boolean
   createdAt?: string | Date
   updatedAt?: string | Date
@@ -266,8 +268,12 @@ export const initialProjects: ProjectItemData[] = [
 let memoryBlogs: BlogItemData[] = [...initialBlogs]
 let memoryProjects: ProjectItemData[] = [...initialProjects]
 
-// Helper to seed Mongo if empty
+let dbSeedChecked = false
+
+// Helper to seed Mongo if empty (runs once per server instance)
 async function ensureDbSeeded() {
+  if (dbSeedChecked) return
+
   try {
     await connectToDatabase()
     const blogCount = await BlogModel.countDocuments()
@@ -278,6 +284,7 @@ async function ensureDbSeeded() {
     if (projectCount === 0) {
       await ProjectModel.insertMany(initialProjects)
     }
+    dbSeedChecked = true
   } catch (err) {
     console.warn("MongoDB connection fallback to memory store:", (err as Error).message)
   }

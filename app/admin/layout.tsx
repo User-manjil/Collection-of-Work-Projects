@@ -35,24 +35,30 @@ export default function AdminLayout({
       return
     }
 
-    const token =
-      localStorage.getItem("admin_token") ||
-      document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("admin_token="))
-        ?.split("=")[1]
-
-    if (!token) {
-      setIsAuthenticated(false)
-      router.push("/admin/login")
-    } else {
-      setIsAuthenticated(true)
+    const verifySession = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { credentials: "include" })
+        if (res.ok) {
+          setIsAuthenticated(true)
+        } else {
+          setIsAuthenticated(false)
+          router.push("/admin/login")
+        }
+      } catch {
+        setIsAuthenticated(false)
+        router.push("/admin/login")
+      }
     }
+
+    void verifySession()
   }, [pathname, isLoginPage, router])
 
-  const handleLogout = () => {
-    localStorage.removeItem("admin_token")
-    document.cookie = "admin_token=; path=/; max-age=0"
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST", credentials: "include" })
+    } catch {
+      // still redirect locally
+    }
     router.push("/admin/login")
   }
 

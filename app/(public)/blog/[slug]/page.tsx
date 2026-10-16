@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getBlogBySlug } from "@/lib/store"
+import { getPublicBlogBySlug } from "@/lib/public-cache"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 
-export const revalidate = 0
+export const revalidate = 120
 
 export default async function BlogPostPage({
   params,
@@ -11,7 +11,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const post = await getBlogBySlug(slug)
+  const post = await getPublicBlogBySlug(slug)
 
   if (!post) {
     notFound()

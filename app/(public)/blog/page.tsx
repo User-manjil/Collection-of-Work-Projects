@@ -1,11 +1,11 @@
 import Link from "next/link"
-import { getBlogs } from "@/lib/store"
+import { getPublicBlogs } from "@/lib/public-cache"
 import { ArrowUpRight } from "lucide-react"
 
-export const revalidate = 0
+export const revalidate = 120
 
 export default async function BlogPage() {
-  const blogs = await getBlogs(true)
+  const blogs = await getPublicBlogs()
 
   return (
     <div className="section-spacious">

@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Save, Trash2, AlertCircle, Eye } from "lucide-react"
+import ProjectImageUpload from "@/components/admin/ProjectImageUpload"
 
 export default function EditProjectPage({
   params,
@@ -24,6 +25,8 @@ export default function EditProjectPage({
   const [metrics, setMetrics] = useState("")
   const [liveUrl, setLiveUrl] = useState("")
   const [githubUrl, setGithubUrl] = useState("")
+  const [thumbnail, setThumbnail] = useState("")
+  const [banner, setBanner] = useState("")
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
@@ -47,6 +50,8 @@ export default function EditProjectPage({
           setMetrics(p.metrics || "")
           setLiveUrl(p.liveUrl || "")
           setGithubUrl(p.githubUrl || "")
+          setThumbnail(p.thumbnail || "")
+          setBanner(p.banner || "")
         } else {
           setError(data.error || "Project not found")
         }
@@ -87,6 +92,8 @@ export default function EditProjectPage({
           metrics,
           liveUrl,
           githubUrl,
+          thumbnail,
+          banner,
         }),
       })
 
@@ -245,6 +252,23 @@ export default function EditProjectPage({
               className="minimal-input"
             />
           </div>
+        </div>
+
+        <div className="form-grid-two">
+          <ProjectImageUpload
+            label="LISTING THUMBNAIL"
+            hint="Shown on the work index. Converted to WebP (~960×600) for fast loading."
+            variant="thumbnail"
+            value={thumbnail}
+            onChange={setThumbnail}
+          />
+          <ProjectImageUpload
+            label="CASE STUDY BANNER"
+            hint="Hero image on the case study page. Optimized to ~1920×900 WebP."
+            variant="banner"
+            value={banner}
+            onChange={setBanner}
+          />
         </div>
 
         <div className="form-field-group">

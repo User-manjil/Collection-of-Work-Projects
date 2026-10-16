@@ -22,8 +22,8 @@ export default function AdminSettingsPage() {
       return
     }
 
-    if (newPassword.length < 4) {
-      setError("Password must be at least 4 characters long")
+    if (newPassword.length < 8) {
+      setError("Password must be at least 8 characters long")
       return
     }
 
@@ -33,6 +33,7 @@ export default function AdminSettingsPage() {
       const res = await fetch("/api/auth/change-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ currentPassword, newPassword }),
       })
 

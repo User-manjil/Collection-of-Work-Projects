@@ -7,8 +7,8 @@ import { Shield, ArrowRight, Lock, Mail, AlertCircle } from "lucide-react"
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState("admin@manjil.dev")
-  const [password, setPassword] = useState("admin123")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -21,14 +21,13 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       })
 
       const data = await res.json()
 
       if (data.success) {
-        localStorage.setItem("admin_token", data.token)
-        document.cookie = `admin_token=${data.token}; path=/; max-age=604800`
         router.push("/admin")
       } else {
         setError(data.error || "Authentication failed")
@@ -96,11 +95,6 @@ export default function AdminLoginPage() {
                 placeholder="••••••••"
               />
             </div>
-          </div>
-
-          <div className="login-hint-strip">
-            <span className="mono-label label-subtle">DEFAULT CREDS:</span>
-            <span className="mono-label">admin@manjil.dev / admin123</span>
           </div>
 
           <button

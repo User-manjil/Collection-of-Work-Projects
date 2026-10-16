@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { invalidateProjectsCache } from "@/lib/invalidate-public-cache"
 import { getProjects, createProject } from "@/lib/store"
 
 export async function GET() {
@@ -29,6 +30,8 @@ export async function POST(req: Request) {
       metrics,
       liveUrl,
       githubUrl,
+      thumbnail,
+      banner,
       featured,
     } = body
 
@@ -59,9 +62,12 @@ export async function POST(req: Request) {
       metrics: metrics || "",
       liveUrl: liveUrl || "",
       githubUrl: githubUrl || "",
+      thumbnail: thumbnail || "",
+      banner: banner || "",
       featured: featured !== undefined ? Boolean(featured) : true,
     })
 
+    invalidateProjectsCache(newProject.slug)
     return NextResponse.json({ success: true, project: newProject }, { status: 201 })
   } catch (err) {
     return NextResponse.json(

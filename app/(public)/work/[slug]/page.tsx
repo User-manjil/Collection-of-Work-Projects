@@ -1,9 +1,10 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getProjectBySlug } from "@/lib/store"
+import { getPublicProjectBySlug } from "@/lib/public-cache"
 import { ArrowLeft, ArrowUpRight, Code2, ExternalLink, CheckCircle2 } from "lucide-react"
+import ProjectCoverImage from "@/components/ui/ProjectCoverImage"
 
-export const revalidate = 0
+export const revalidate = 120
 
 export default async function CaseStudyDetailPage({
   params,
@@ -11,7 +12,7 @@ export default async function CaseStudyDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const project = await getProjectBySlug(slug)
+  const project = await getPublicProjectBySlug(slug)
 
   if (!project) {
     notFound()
@@ -27,6 +28,19 @@ export default async function CaseStudyDetailPage({
             <span>Back to projects</span>
           </Link>
         </div>
+
+        {(project.banner || project.thumbnail) && (
+          <div className="case-study-banner-wrap">
+            <ProjectCoverImage
+              src={project.banner || project.thumbnail}
+              alt={`${project.title} banner`}
+              title={project.title}
+              priority
+              sizes="100vw"
+              className="case-study-banner-frame"
+            />
+          </div>
+        )}
 
         {/* Case Study Header */}
         <header className="case-study-header-spacious">

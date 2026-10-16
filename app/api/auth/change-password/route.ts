@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server"
 import { updateAdminPassword } from "@/lib/auth"
+import { verifyAdminFromRequest } from "@/lib/verify-admin-request"
 
 export async function POST(req: Request) {
+  if (!verifyAdminFromRequest(req)) {
+    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
+  }
+
   try {
     const { currentPassword, newPassword } = await req.json()
 

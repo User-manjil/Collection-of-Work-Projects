@@ -13,6 +13,8 @@ export interface IProject extends Document {
   metrics?: string
   liveUrl?: string
   githubUrl?: string
+  thumbnail?: string
+  banner?: string
   featured: boolean
   createdAt: Date
   updatedAt: Date
@@ -32,6 +34,8 @@ const ProjectSchema = new Schema<IProject>(
     metrics: { type: String, default: "" },
     liveUrl: { type: String, default: "" },
     githubUrl: { type: String, default: "" },
+    thumbnail: { type: String, default: "" },
+    banner: { type: String, default: "" },
     featured: { type: Boolean, default: true },
   },
   {
