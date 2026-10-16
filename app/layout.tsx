@@ -3,8 +3,7 @@ import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
