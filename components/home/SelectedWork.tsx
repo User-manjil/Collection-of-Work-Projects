@@ -4,7 +4,7 @@ import { getPublicProjects } from "@/lib/public-cache"
 
 export default async function SelectedWork() {
   const dataProjects = await getPublicProjects()
-    let num = 1
+    
   return (
     <section className="section section-border" id="selected-work">
       <div className="container">
