@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "fs/promises"
 import path from "path"
 // Safe dynamic loader for sharp
-type SharpFn = typeof import("sharp")
+type SharpFn = typeof import("sharp").default
 let sharpModule: SharpFn | null = null
 
 async function getSharp(): Promise<SharpFn | null> {
