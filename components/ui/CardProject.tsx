@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Button from "./Button"
 import ProjectCoverImage from "./ProjectCoverImage"
 
@@ -33,12 +34,14 @@ export default function CardProject({
       >
         {/* Visual Box */}
         <div className="project-media-container" style={{ direction: "ltr" }}>
-          <ProjectCoverImage
-            src={thumbnail}
-            alt={`${title} preview`}
-            title={title}
-            sizes="(max-width: 768px) 100vw, 540px"
-          />
+          <Link href={link} className="project-media-link" aria-label={`View case study for ${title}`}>
+            <ProjectCoverImage
+              src={thumbnail}
+              alt={`${title} preview`}
+              title={title}
+              sizes="(max-width: 768px) 100vw, 540px"
+            />
+          </Link>
         </div>
 
         {/* Content */}

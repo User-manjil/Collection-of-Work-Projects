@@ -50,13 +50,13 @@ export async function POST(req: Request) {
     }
 
     const arrayBuffer = await file.arrayBuffer()
-    const url = await saveOptimizedProjectImage(Buffer.from(arrayBuffer), variant)
+    const url = await saveOptimizedProjectImage(Buffer.from(arrayBuffer), variant, file.type)
 
     return NextResponse.json({ success: true, url })
   } catch (err) {
     console.error("Upload failed:", err)
     return NextResponse.json(
-      { success: false, error: "Failed to process image" },
+      { success: false, error: err instanceof Error ? `${err.name}: ${err.message}` : "Failed to process image" },
       { status: 500 }
     )
   }

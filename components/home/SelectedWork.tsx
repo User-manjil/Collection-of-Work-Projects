@@ -19,17 +19,17 @@ export default async function SelectedWork() {
         </div>
 
         <div className="projects-collection">
-          {dataProjects.map((project,indx) => (
-            
+          {dataProjects.map((project, indx) => (
             <CardProject
-              key={project.id}
-              id={indx+1}
+              key={project.id || project.slug}
+              id={indx + 1}
               projecttype={project.projecttype}
               title={project.title}
               subtitle={project.subtitle}
               description={project.description}
               techStack={project.techStack}
               link={`/work/${project.slug}`}
+              thumbnail={project.thumbnail || project.banner}
             />
           ))}
         </div>

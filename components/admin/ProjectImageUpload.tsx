@@ -23,14 +23,16 @@ export default function ProjectImageUpload({
 }: ProjectImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState("")
 
   const handleFile = async (file: File | undefined) => {
     if (!file) return
     setError("")
 
-    if (!file.type.startsWith("image/")) {
-      setError("Please choose an image file")
+    const isImage = file.type.startsWith("image/") || /\.(jpe?g|png|webp|avif|gif)$/i.test(file.name)
+    if (!isImage) {
+      setError("Please choose a valid image file (JPEG, PNG, WebP, AVIF, GIF)")
       return
     }
 
@@ -53,7 +55,7 @@ export default function ProjectImageUpload({
 
       const data = await res.json()
       if (!res.ok || !data.success) {
-        setError(data.error || "Upload failed")
+        setError(data.error || "Upload failed. Please ensure you are logged in as admin.")
         return
       }
 
@@ -66,6 +68,26 @@ export default function ProjectImageUpload({
     }
   }
 
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+    const file = e.dataTransfer?.files?.[0]
+    void handleFile(file)
+  }
+
   return (
     <div className="form-field-group">
       <label className="mono-label label-subtle">{label}</label>
@@ -74,7 +96,13 @@ export default function ProjectImageUpload({
       </p>
 
       {value ? (
-        <div className="project-image-preview-wrap" style={{ aspectRatio: previewAspect }}>
+        <div
+          className="project-image-preview-wrap"
+          style={{ aspectRatio: previewAspect }}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
           <Image
             src={value}
             alt=""
@@ -94,10 +122,17 @@ export default function ProjectImageUpload({
       ) : (
         <button
           type="button"
-          className="project-image-dropzone"
-          style={{ aspectRatio: previewAspect }}
+          className={`project-image-dropzone ${isDragging ? "active" : ""}`}
+          style={{
+            aspectRatio: previewAspect,
+            borderColor: isDragging ? "var(--foreground)" : undefined,
+            background: isDragging ? "var(--surface-hover)" : undefined,
+          }}
           disabled={uploading}
           onClick={() => inputRef.current?.click()}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
         >
           {uploading ? (
             <>
@@ -107,7 +142,9 @@ export default function ProjectImageUpload({
           ) : (
             <>
               <ImagePlus size={22} />
-              <span className="text-small">Click to upload (JPEG, PNG, WebP)</span>
+              <span className="text-small">
+                {isDragging ? "Drop image to upload" : "Click or drag image to upload"}
+              </span>
             </>
           )}
         </button>
@@ -122,7 +159,7 @@ export default function ProjectImageUpload({
       <input
         ref={inputRef}
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/avif"
+        accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
         className="sr-only"
         onChange={(e) => void handleFile(e.target.files?.[0])}
       />
